@@ -1,3 +1,4 @@
+import math
 from openpyscad import *
 
 
@@ -6,87 +7,104 @@ def cm(value):
     return value / 0.1
 
 
-# Values
+# Constants
 device_depth = cm(1)
 device_width = cm(6.8)
-pipe_width = device_depth
-wireless_charger_radius = cm(4.5)
-wireless_charger_depth = cm(1)
-min_height_above_ground = wireless_charger_radius + cm(4.5)
+device_height = cm(13.5)
+margin = cm(0.025)  # Space between parts
+avoid_z_fighting = 0.01
+pipe_width = cm(0.5)  # device_depth
+charger_radius = cm(4.6)
+charger_depth = cm(1)
+charger_center = pipe_width + device_height / 2
 
-width = (wireless_charger_radius + pipe_width) * 2
-height = min_height_above_ground
-grow = wireless_charger_radius / 2
+width = (charger_radius + pipe_width) * 2
+charger_center = charger_center
+grow = charger_radius / 2
 
 # Shapes
-bottom_pipe = Cube([width, pipe_width, pipe_width])
-
-left_pipe = Cube([pipe_width, pipe_width, height - device_width / 2])
-left_pipe_flick = Cube(
-    [pipe_width, wireless_charger_depth + pipe_width, pipe_width])
-left_pipe_flick = left_pipe_flick.translate(
-    [0, 0, height - pipe_width - device_width / 2])
-left_pipe_wall = Cube(
-    [pipe_width, pipe_width, device_width / 2 + grow])
-left_pipe_wall = left_pipe_wall.translate(
-    [0, pipe_width, height - device_width / 2])
-
-right_pipe = Cube([pipe_width, pipe_width, height - device_width / 2])
-right_pipe = right_pipe.translate([width - pipe_width, 0, 0])
-right_pipe_flick = Cube(
-    [pipe_width, wireless_charger_depth + pipe_width, pipe_width])
-right_pipe_flick = right_pipe_flick.translate(
-    [width - pipe_width, 0, height - pipe_width - device_width / 2])
-right_pipe_wall = Cube(
-    [pipe_width, pipe_width, device_width / 2 + grow])
-right_pipe_wall = right_pipe_wall.translate(
-    [width - pipe_width, pipe_width, height - device_width / 2])
-
-wireless_charger = Cylinder(wireless_charger_depth, wireless_charger_radius)
-wireless_charger = wireless_charger.rotate([-90, 0, 0])
-wireless_charger = wireless_charger.translate(
-    [pipe_width + wireless_charger_radius, pipe_width, height])
-
-wireless_charger_back = Cube(
-    [width, pipe_width, device_width / 2 + pipe_width + grow])
-wireless_charger_back = wireless_charger_back.translate(
-    [0, wireless_charger_depth + pipe_width, height - pipe_width - device_width / 2])
-
-hole_width = pipe_width / 2
-hole_margin = (pipe_width - hole_width) / 2
-hole = Cylinder(pipe_width + hole_width / 4, hole_width / 2).rotate([0, 90, 0]).translate(
-    [-hole_width/8, pipe_width + hole_margin * 2, height - device_width / 2 - pipe_width + hole_margin * 2])
-adjust_holes_left = (
-    hole
-    + hole.translate([0, 0, pipe_width])
-    + hole.translate([0, 0, pipe_width*2])
-    + hole.translate([0, 0, pipe_width*3])
-    + hole.translate([0, 0, pipe_width*4])
+charger = (
+    Cylinder(charger_depth + avoid_z_fighting, charger_radius)
+    .rotate([-90, 0, 0])
+    .translate([pipe_width + charger_radius, device_depth - avoid_z_fighting, charger_center])
 )
-adjust_holes_right = adjust_holes_left.translate([width - pipe_width, 0, 0])
-adjust_holes = adjust_holes_left + adjust_holes_right
 
-bottom_hole_depth = cm(0.5)
-bottom_hole_left = Cylinder(
-    bottom_hole_depth*2, hole_width / 2).rotate([0, 90, 0]).translate([-bottom_hole_depth, pipe_width / 2, pipe_width / 2])
-bottom_hole_right = bottom_hole_left.translate(
-    [width, 0, 0])
-bottom_holes = bottom_hole_right + bottom_hole_left
+device = Cube([device_width, device_depth + avoid_z_fighting, device_height])
+device_portrait = (
+    device
+    .translate([width / 2 - device_width / 2, -avoid_z_fighting, pipe_width])
+)
+device_landscape = (
+    device
+    .rotate([0, 90, 0])
+    .translate([width / 2 - device_height / 2, -avoid_z_fighting, charger_center + device_width / 2])
+)
+
+dx = width / 2 - device_width / 2 - pipe_width
+dy = charger_center - device_width / 2
+skew_angle = math.atan2(dx, dy) * 180 / math.pi
+device_skew_left = (
+    device
+    .rotate([0, -skew_angle, 0])
+    .translate([width / 2 - device_width / 2, -avoid_z_fighting, pipe_width])
+)
+device_skew_right = (
+    device
+    .rotate([0, -skew_angle, 0])
+    .scale([-1, 1, 1])
+    .translate([width / 2 + device_width / 2, -avoid_z_fighting, pipe_width])
+)
+
+front = Cube([width, pipe_width, charger_center])
+front -= device_portrait + device_landscape
+front -= device_skew_left + device_skew_right
+
+charger_container = (
+    Cube([width, pipe_width + charger_depth + device_depth,
+          device_width / 2 + pipe_width + grow])
+    .translate([0, 0, charger_center - pipe_width - device_width / 2])
+    - charger
+    - (device_portrait + device_landscape)
+    - (device_skew_left + device_skew_right)
+)
+
+bottom_depth = pipe_width * 2 * 6
+bottom = (
+    Cube([width, bottom_depth, pipe_width * 1.5])
+    .translate([0, -pipe_width / 2, -pipe_width * 0.8])
+)
+for i in range(5):
+    bottom -= (
+        Cube([width + avoid_z_fighting*2, pipe_width + margin*2, pipe_width*2])
+        # .scale([1, -1, 1])
+        .translate([0, -pipe_width / 2, -pipe_width / 2])
+        .rotate([-30 + i*(30/4), 0, 0])
+        .translate([-avoid_z_fighting, pipe_width + pipe_width*2*i, pipe_width / 2 - margin])
+    )
+
 
 # Build the main part
 main_part = (
-    bottom_pipe
-    + left_pipe + left_pipe_flick + left_pipe_wall
-    + right_pipe + right_pipe_flick + right_pipe_wall
-    + wireless_charger_back
-    + wireless_charger
-    - adjust_holes
-    - bottom_holes
+    front
+    + charger_container
+    #+ charger
+    #+ device_portrait
+    #+ device_landscape
 )
 
-# TODO: Build the bottom
-# TODO: Build the support
-# TODO: Build adjust support
+# Build the bottom
 
-# Render
-main_part.write("main-part.scad", with_print=True)
+bottom_part = (
+    bottom
+)
+
+# Render each model to separate files
+main_part.write("main-part.scad")
+bottom_part.write("bottom-part.scad")
+
+# Render all the models to the same file
+(
+    main_part
+    + bottom_part.translate([0, 0, -pipe_width])
+    #+ charger
+).write("all-parts.scad")
