@@ -55,9 +55,11 @@ device_skew_right = (
     .translate([width / 2 + device_width / 2, -avoid_z_fighting, pipe_width])
 )
 
-front = Cube([width, pipe_width, charger_center])
-front -= device_portrait + device_landscape
-front -= device_skew_left + device_skew_right
+front = (
+    Cube([width, pipe_width, charger_center])
+    - (device_portrait + device_landscape)
+    - (device_skew_left + device_skew_right)
+)
 
 charger_container = (
     Cube([width, pipe_width + charger_depth + device_depth,
@@ -87,13 +89,9 @@ for i in range(5):
 main_part = (
     front
     + charger_container
-    #+ charger
-    #+ device_portrait
-    #+ device_landscape
 )
 
 # Build the bottom
-
 bottom_part = (
     bottom
 )
@@ -106,5 +104,4 @@ bottom_part.write("bottom-part.scad")
 (
     main_part
     + bottom_part.translate([0, 0, -pipe_width])
-    #+ charger
 ).write("all-parts.scad")
