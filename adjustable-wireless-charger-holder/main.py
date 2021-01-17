@@ -11,6 +11,7 @@ def cm(value):
 device_depth = cm(1)
 device_width = cm(6.8)
 device_height = cm(13.5)
+device_bottom_offset = cm(0.8)
 margin = cm(0.025)  # Space between parts
 avoid_z_fighting = 0.01
 pipe_width = cm(0.5)  # device_depth
@@ -34,40 +35,55 @@ device_portrait = (
     device
     .translate([width / 2 - device_width / 2, -avoid_z_fighting, pipe_width])
 )
+device_portrait_shrinked = (
+    device
+    .scale([(device_width - device_bottom_offset) / device_width, 1, 1])
+    .translate([width / 2 - device_width / 2 + device_bottom_offset / 2, -avoid_z_fighting, pipe_width])
+)
 device_landscape = (
     device
     .rotate([0, 90, 0])
     .translate([width / 2 - device_height / 2, -avoid_z_fighting, charger_center + device_width / 2])
 )
 
-dx = width / 2 - device_width / 2 - pipe_width
+dx = width / 2 - device_width / 2 - pipe_width*2.5 + device_bottom_offset
 dy = charger_center - device_width / 2
 skew_angle = math.atan2(dx, dy) * 180 / math.pi
 device_skew_left = (
     device
     .rotate([0, -skew_angle, 0])
-    .translate([width / 2 - device_width / 2, -avoid_z_fighting, pipe_width])
+    .translate([width / 2 - (device_width - device_bottom_offset) / 2, -avoid_z_fighting, pipe_width])
 )
 device_skew_right = (
     device
     .rotate([0, -skew_angle, 0])
     .scale([-1, 1, 1])
-    .translate([width / 2 + device_width / 2, -avoid_z_fighting, pipe_width])
+    .translate([width / 2 + (device_width - device_bottom_offset) / 2, -avoid_z_fighting, pipe_width])
 )
 
 front = (
     Cube([width, pipe_width, charger_center])
-    - (device_portrait + device_landscape)
+    - (device_portrait_shrinked + device_landscape)
     - (device_skew_left + device_skew_right)
+)
+
+charger_cable_width = cm(1.5)
+charger_cable = (
+    Cube([charger_radius * 2, device_depth - pipe_width + charger_depth +
+          avoid_z_fighting, charger_cable_width])
+    .translate([0, 0, -charger_cable_width / 2])
+    .rotate([0, 52.62, 0])
+    .translate([charger_radius + pipe_width, pipe_width - avoid_z_fighting, charger_center])
 )
 
 charger_container = (
     Cube([width, pipe_width + charger_depth + device_depth,
           device_width / 2 + pipe_width + grow])
-    .translate([0, 0, charger_center - pipe_width - device_width / 2])
+    .translate([0, 0, charger_center - pipe_width * 3 - device_width / 2])
     - charger
     - (device_portrait + device_landscape)
     - (device_skew_left + device_skew_right)
+    - charger_cable
 )
 
 bottom_depth = pipe_width * 2 * 6
