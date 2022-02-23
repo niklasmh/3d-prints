@@ -1,0 +1,74 @@
+from solid import *
+from solid.utils import *
+import math
+
+cm = 10
+z = 0.03
+fn = 64
+
+
+def render(model, filename, fn=fn):
+    scad_render_to_file(model, filename, file_header='$fn = %d;' % fn)
+
+
+tube_radius = 13 * cm / 2
+fan_outlet_radius = 12.5 * cm / 2
+joint_radius = 0.5 * cm
+
+margin = 0.1 * cm
+padding_r = 0.5 * cm
+total_height = 2 * cm
+
+fan_outlet = cylinder(
+    tube_radius + padding_r, total_height / 2)
+fan_outlet_hole = cylinder(fan_outlet_radius, total_height / 2 + z*2)
+fan_outlet_hole = translate([0, 0, - z])(fan_outlet_hole)
+
+tube = cylinder(
+    tube_radius + padding_r, total_height / 2)
+tube_hole = cylinder(tube_radius, total_height / 2 + z*2)
+tube_hole = translate([0, 0, - z])(tube_hole)
+
+
+fan_outlet_attachment = fan_outlet - fan_outlet_hole
+fan_outlet_attachment = translate(
+    [0, 0, -total_height / 2])(fan_outlet_attachment)
+
+tube_attachment = tube - tube_hole
+
+combined = fan_outlet_attachment + tube_attachment
+
+half = combined - translate([-tube_radius - padding_r, 0, - total_height / 2 - z])(
+    cube([2*(tube_radius + padding_r), 2 *
+          (tube_radius + padding_r), total_height + z*2])
+)
+
+joint_attachment_hole = cylinder(joint_radius, total_height / 2 + 2*z)
+joint_attachment_hole = translate([0, 0, -z])(joint_attachment_hole)
+joint_attachment = cylinder(
+    joint_radius + padding_r, total_height / 2) - joint_attachment_hole
+
+joint_attachment_top = translate(
+    [tube_radius + padding_r + joint_radius, 0, 0])(joint_attachment)
+joint_attachment_top_hole = translate(
+    [-(tube_radius + padding_r + joint_radius), 0, 0])(joint_attachment)
+
+joint_attachment_bottom = translate(
+    [-(tube_radius + padding_r + joint_radius), 0, -total_height / 2])(joint_attachment)
+joint_attachment_bottom_hole = translate(
+    [tube_radius + padding_r + joint_radius, 0, -total_height / 2])(joint_attachment)
+
+
+nail_head = cylinder(joint_radius + padding_r, padding_r / 2 + 2*z)
+nail_head = translate([0, 0, total_height])(nail_head)
+nail = cylinder(joint_radius - margin, total_height + 2*z) + nail_head
+
+render(
+    half
+    + joint_attachment_top
+    - joint_attachment_top_hole
+    + joint_attachment_bottom
+    - joint_attachment_bottom_hole,
+    "tube_attachment_half.scad"
+)
+render(nail, "nail.scad")
