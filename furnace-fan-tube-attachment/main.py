@@ -15,7 +15,7 @@ tube_radius = 13 * cm / 2
 fan_outlet_radius = 12.5 * cm / 2
 joint_radius = 0.5 * cm
 
-margin = 0.1 * cm
+margin = 0.025 * cm
 padding_r = 0.5 * cm
 total_height = 2 * cm
 
