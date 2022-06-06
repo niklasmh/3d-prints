@@ -6,4 +6,8 @@ Want to use curtains in an rental apartment without having to screw holes in the
 
 ## Result
 
-WIP
+![Finished print](finished-print.jpg)
+
+And this is the final result. No holes in wall and a fully adjustable curtain rod (both horizontally and vertically)!
+
+![Full solution](full-solution.jpg)
