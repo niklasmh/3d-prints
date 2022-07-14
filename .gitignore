@@ -2,6 +2,7 @@
 *.tmp
 
 /*
+!secret
 !adjustable-wireless-charger-holder
 !cable-clip
 !hanging-phone-holder
