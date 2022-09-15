@@ -26,24 +26,25 @@ wall_support_margin_z = 1.5*cm
 #                      wall_support_margin_z
 #                               |
 #                               z
-center_depth = 1.2*cm
+center_depth = 3*cm
 support_margin_y = 1.5*cm * 0
 
 width = center_width + roof_support_margin_x
 depth = support_margin_y + center_depth + support_margin_y
 height = wall_support_margin_z
-m = 0.3*cm
+m = 0.2*cm
 
 # Light strip
 ls_width = 1.15*cm
-ls_depth = center_depth
-ls_height = 0.92*cm
+ls_depth = 1.2*cm
+ls_height = 0.4*cm
 ls_indent_width = 0.15*cm
 ls_indent_height = 0.2*cm
 
 
 def generate_light_strip_holder():
-    holder = cube([ls_width + m*0.7, ls_depth, ls_height + ls_indent_height])
+    holder = cube([ls_width + m, ls_depth,
+                  ls_height + ls_indent_height])
     cutout = cube([ls_width + z2, ls_depth + z2,
                   ls_height + ls_indent_height + z2])
     cutout = translate([-z, -z, -z])(cutout)
