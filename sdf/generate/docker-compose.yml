@@ -5,4 +5,4 @@ services:
     build: .
     command: python "${FILE}"
     volumes:
-      - .:/home/sdf:rw
+      - ..:/home/sdf:rw
