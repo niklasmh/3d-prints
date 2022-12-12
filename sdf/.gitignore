@@ -1,4 +1,5 @@
 
 *.stl
 *.py
+!run.py
 !example.*
