@@ -19,8 +19,22 @@ parser.add_argument('--help', action='help', default=argparse.SUPPRESS,
                     help='Show this help message and exit.')
 args = parser.parse_args()
 
-FILENAME = args.file[:-3] if args.file[-3:] == ".py" else args.file
-MESH_FILE = FILENAME + ".stl"
+
+def pj(path1, path2):
+    return os.path.join(path1, path2)
+
+
+def mkdir(dir):
+    pathlib.Path(dir).mkdir(parents=True, exist_ok=True)
+
+
+CURRENT_FILE = os.path.realpath(__file__)
+CURRENT_FOLDER = os.path.dirname(CURRENT_FILE)
+
+PATH = args.file[:-3] if args.file[-3:] == ".py" else args.file
+FILENAME = PATH.split("/")[-1]
+FOLDER = "".join(PATH.split("/")[:-1])
+MESH_FILE = pj(CURRENT_FOLDER, pj(FOLDER, FILENAME + ".stl"))
 WATCH = args.watch
 PREVIEW = args.preview
 
@@ -32,17 +46,10 @@ if PREVIEW and WATCH:
 
 
 if WATCH:
-    command = f"nodemon --exec python3 --watch {FILENAME}.py run.py {FILENAME}.py"
-    subprocess.run(command, env=os.environ, shell=True)
+    folder = FOLDER or None
+    command = f"nodemon --exec python3 --watch {FILENAME}.py {CURRENT_FILE} {pj(FOLDER, FILENAME)}.py"
+    subprocess.run(command, cwd=folder, env=os.environ, shell=True)
     exit(0)
-
-
-def pj(path1, path2):
-    return os.path.join(path1, path2)
-
-
-def mkdir(dir):
-    pathlib.Path(dir).mkdir(parents=True, exist_ok=True)
 
 
 # Run the mesh generator
@@ -50,13 +57,14 @@ def mkdir(dir):
 command = "docker-compose run sdf"
 env = os.environ.copy()
 env["FILE"] = FILENAME + ".py"
-folder = "generate"
+env["FOLDER"] = FOLDER
+folder = pj(CURRENT_FOLDER, "generate")
 subprocess.run(command, cwd=folder, env=env, shell=True)
 
 
 # Output files to the previewer
 
-PREVIEW_FOLDER = "preview/src/assets"
+PREVIEW_FOLDER = pj(CURRENT_FOLDER, "preview/src/assets")
 PREVIEW_INFO_FILE = pj(PREVIEW_FOLDER, "info.txt")
 PREVIEW_MESH_FILE = pj(PREVIEW_FOLDER, "mesh.stl")
 

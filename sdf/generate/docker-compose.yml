@@ -6,3 +6,4 @@ services:
     command: python "${FILE}"
     volumes:
       - ..:/home/sdf:rw
+    working_dir: /home/sdf/${FOLDER}
