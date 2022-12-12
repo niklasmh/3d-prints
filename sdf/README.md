@@ -11,17 +11,19 @@ Requirements:
 - Bash
 
 ```bash
+# Run this from the root folder / (not /sdf)
+
 # Create the STL model from example.py -> example.stl
-python3 run.py example.py
+python3 sdf.py sdf/example.py
 
 # Watch for changes & preview model in browser
-python3 run.py example.py -wp
+python3 sdf.py sdf/example.py -wp
 ```
 
 ## CLI arguments
 
 ```bash
-usage: run.py [-w] [-p] [--help] file
+usage: sdf.py [-w] [-p] [--help] file
 
 Generate mesh models from SDF using marching cubes.
 
@@ -36,4 +38,4 @@ optional arguments:
 
 ## What the previewer looks like
 
-![Example](./preview/example.png)
+![Example](../mesh-viewer/example.png)

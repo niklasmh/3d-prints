@@ -1,11 +1,8 @@
 
-*.stl
-*.py
 /*/
 !preview
 !run.py
 
 # Projects
-!ball-in-cube.*
-!example.*
-!icosahedron-in-cube.*
+!ball-in-cube
+!icosahedron-in-cube

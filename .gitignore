@@ -2,8 +2,10 @@
 *.tmp
 
 /*
+!mesh-viewer
 !secret
 !sdf
+!sdf.py
 !.gitmodules
 !LICENSE
 
