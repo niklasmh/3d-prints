@@ -14,7 +14,7 @@ Requirements:
 # Create the STL model from example.py -> example.stl
 python3 run.py example.py
 
-# Listen for changes & preview model in browser
+# Watch for changes & preview model in browser
 python3 run.py example.py -wp
 ```
 
