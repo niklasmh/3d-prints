@@ -2,4 +2,6 @@
 *.stl
 *.py
 !run.py
+!ball-in-cube.*
 !example.*
+!icosahedron-in-cube.*
