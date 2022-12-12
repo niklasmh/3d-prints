@@ -12,6 +12,7 @@ function App() {
   const [loading, isLoading] = useState(true);
   const [showMesh, setShowMesh] = useState(true);
   const [showImage, setShowImage] = useState(false);
+  const [showGrid, setShowGrid] = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -43,16 +44,23 @@ function App() {
 
   return (
     <div className="App">
-      <h3>{name}</h3>
+      <h1 className="title" onClick={() => setShowGrid((s) => !s)}>
+        {name}
+      </h1>
       <div className="preview">
         {showImage && <img src={renderedImageUrl + "?v=" + version} alt="Rendered stl" />}
         {showMesh && (
           <StlViewer
             style={{
-              top: 0,
-              left: 0,
               width: "100vw",
               height: "100vh",
+            }}
+            modelProps={{
+              color: "#047",
+            }}
+            floorProps={{
+              gridWidth: showGrid ? 200 : 0,
+              gridLength: showGrid ? 200 : 0,
             }}
             orbitControls
             shadows
