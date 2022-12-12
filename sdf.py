@@ -13,11 +13,11 @@ parser = argparse.ArgumentParser(add_help=False,
                                  description='Generate mesh models from SDF using marching cubes.')
 
 parser.add_argument(
-    "file", help="Python filename (with .py-extension) OR folder (containing main.py file)")
+    "file", help="Python filename (with .py-extension) OR folder (containing main.py file).")
 parser.add_argument("-w", "--watch", action="store_true",
-                    help="Generate new mesh when file is changed")
+                    help="Generate new mesh when file is changed.")
 parser.add_argument("-p", "--preview", action="store_true",
-                    help="Preview mesh in browser")
+                    help="Preview mesh in browser.")
 parser.add_argument('--help', action='help', default=argparse.SUPPRESS,
                     help='Show this help message and exit.')
 args = parser.parse_args()

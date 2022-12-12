@@ -28,11 +28,11 @@ usage: sdf.py [-w] [-p] [--help] file
 Generate mesh models from SDF using marching cubes.
 
 positional arguments:
-  file           Python filename (with extension)
+  file           Python filename (with .py-extension) OR folder (containing main.py file).
 
 optional arguments:
-  -w, --watch    Generate new mesh when file is changed
-  -p, --preview  Preview mesh in browser
+  -w, --watch    Generate new mesh when file is changed.
+  -p, --preview  Preview mesh in browser.
   --help         Show this help message and exit.
 ```
 
