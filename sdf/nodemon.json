@@ -1,7 +1,0 @@
-{
-  "watch": ["*.py"],
-  "ignore": ["run.py"],
-  "execMap": {
-    "py": "python3"
-  }
-}

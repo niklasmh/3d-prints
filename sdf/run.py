@@ -32,7 +32,7 @@ if PREVIEW and WATCH:
 
 
 if WATCH:
-    command = f"nodemon run.py {FILENAME}.py"
+    command = f"nodemon --exec python3 --watch {FILENAME}.py run.py {FILENAME}.py"
     subprocess.run(command, env=os.environ, shell=True)
     exit(0)
 
