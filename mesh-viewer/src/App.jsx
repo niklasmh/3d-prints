@@ -20,7 +20,7 @@ function App() {
         .then((r) => r.text())
         .then((info) => {
           const [type, renderId, name] = info.split(" ");
-          setName(name);
+          setName(name.replaceAll("-", " "));
           setVersion(parseInt(renderId));
           isLoading(false);
           if (type === "stl") {
