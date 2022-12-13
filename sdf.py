@@ -92,7 +92,7 @@ shutil.copyfile(MESH_FILE, PREVIEW_MESH_FILE)
 
 with open(PREVIEW_INFO_FILE, "w") as f:
     id = random.randint(1000, 9999)
-    f.write(f"stl {id} {FILENAME}")
+    f.write(f"stl {id} {PROJECT_NAME}")
 
 if PREVIEW and not WATCH:
     command = "npm run dev"
