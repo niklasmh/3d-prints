@@ -23,8 +23,12 @@ parser.add_argument('--help', action='help', default=argparse.SUPPRESS,
 args = parser.parse_args()
 
 
-def pj(path1, path2):
-    return os.path.join(path1, path2)
+def pj(*paths):
+    return os.path.join(*paths)
+
+
+def ps(path):
+    return os.path.normpath(path).split(os.sep)
 
 
 def mkdir(dir):
@@ -34,19 +38,31 @@ def mkdir(dir):
 CURRENT_FILE = os.path.realpath(__file__)
 CURRENT_FOLDER = os.path.dirname(CURRENT_FILE)
 
+ENV = {}
+try:
+    for line in open(".env").read().strip().split("\n"):
+        key, value = line.split("=")
+        ENV[key.strip()] = value.strip()
+except:
+    ENV["PYTHON_COMMAND"] = "python"
+    ENV["USE_DOCKER"] = "false"
+
+USE_DOCKER = ENV["USE_DOCKER"] == "true"
+PYTHON_COMMAND = ENV["PYTHON_COMMAND"]
+
 IS_PYTHON_FILE = args.file[-3:] == ".py"
 if IS_PYTHON_FILE:
     PATH = args.file[:-3]
-    FILENAME = PATH.split("/")[-1]
+    FILENAME = ps(PATH)[-1]
     PROJECT_NAME = FILENAME
-    FOLDER = "/".join(PATH.split("/")[:-1])
-    MESH_FILE = pj(CURRENT_FOLDER, pj(FOLDER, FILENAME + ".stl"))
+    FOLDER = pj(*ps(PATH)[:-1])
+    MESH_FILE = pj(CURRENT_FOLDER, FOLDER, FILENAME + ".stl")
 else:
     PATH = args.file
     FILENAME = "main"
-    PROJECT_NAME = PATH.split("/")[-1]
+    PROJECT_NAME = ps(PATH)[-1]
     FOLDER = PATH
-    MESH_FILE = pj(CURRENT_FOLDER, pj(FOLDER, PROJECT_NAME + ".stl"))
+    MESH_FILE = pj(CURRENT_FOLDER, FOLDER, PROJECT_NAME + ".stl")
 WATCH = args.watch
 PREVIEW = args.preview
 
@@ -58,7 +74,8 @@ if PREVIEW and WATCH:
         command, cwd=folder, env=os.environ, shell=True)
 
     def exit_handler():
-        os.killpg(os.getpgid(preview_process.pid), signal.SIGTERM)
+        if os.name != 'nt':
+            os.killpg(os.getpgid(preview_process.pid), signal.SIGTERM)
 
     atexit.register(exit_handler)
 
@@ -66,19 +83,24 @@ if PREVIEW and WATCH:
 if WATCH:
     folder = FOLDER or None
     param = FOLDER if FILENAME == "main" else pj(FOLDER, FILENAME) + ".py"
-    command = f"nodemon --exec python3 --watch {FILENAME}.py {CURRENT_FILE} {param}"
+    command = f"nodemon --exec {PYTHON_COMMAND} --watch {FILENAME}.py {CURRENT_FILE} {param}"
     subprocess.run(command, cwd=folder, env=os.environ, shell=True)
     exit(0)
 
 
 # Run the mesh generator
 
-command = "docker-compose run sdf"
 env = os.environ.copy()
-env["FILE"] = FILENAME + ".py"
-env["FOLDER"] = FOLDER
-folder = pj(CURRENT_FOLDER, "sdf")
-subprocess.run(command, cwd=folder, env=env, shell=True)
+if USE_DOCKER:
+    folder = pj(CURRENT_FOLDER, "sdf")
+    command = "docker-compose run sdf"
+    env["FILE"] = FILENAME + ".py"
+    env["FOLDER"] = FOLDER
+    subprocess.run(command, cwd=folder, env=env, shell=True)
+else:
+    folder = pj(CURRENT_FOLDER, FOLDER)
+    command = PYTHON_COMMAND + " " + FILENAME + ".py"
+    subprocess.run(command, cwd=folder, env=env, shell=True)
 
 
 # Output files to the previewer
