@@ -39,13 +39,14 @@ CURRENT_FILE = os.path.realpath(__file__)
 CURRENT_FOLDER = os.path.dirname(CURRENT_FILE)
 
 ENV = {}
+ENV["PYTHON_COMMAND"] = "python"
+ENV["USE_DOCKER"] = "false"
 try:
     for line in open(".env").read().strip().split("\n"):
         key, value = line.split("=")
         ENV[key.strip()] = value.strip()
 except:
-    ENV["PYTHON_COMMAND"] = "python"
-    ENV["USE_DOCKER"] = "false"
+    pass
 
 USE_DOCKER = ENV["USE_DOCKER"] == "true"
 PYTHON_COMMAND = ENV["PYTHON_COMMAND"]
