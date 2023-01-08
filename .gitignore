@@ -5,7 +5,7 @@
 !mesh-viewer
 !secret
 !sdf
-!sdf.py
+!makesdf.py
 !.gitmodules
 !LICENSE
 

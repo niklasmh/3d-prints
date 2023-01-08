@@ -14,16 +14,16 @@ Requirements:
 # Run this from the root folder / (not /sdf)
 
 # Create the STL model from example.py -> example.stl
-python3 sdf.py sdf/example.py
+python3 makesdf.py sdf/example.py
 
 # Watch for changes & preview model in browser
-python3 sdf.py sdf/example.py -wp
+python3 makesdf.py sdf/example.py -wp
 ```
 
 ## CLI arguments
 
 ```bash
-usage: sdf.py [-w] [-p] [--help] file
+usage: makesdf.py [-w] [-p] [--help] file
 
 Generate mesh models from SDF using marching cubes.
 
