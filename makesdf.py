@@ -48,6 +48,14 @@ try:
 except:
     pass
 
+# Env vars should override .env-file
+env = os.environ.copy()
+for key in ENV.keys():
+    if key in env:
+        ENV[key] = env[key]
+    else:
+        env[key] = ENV[key]
+
 USE_DOCKER = ENV["USE_DOCKER"] == "true"
 PYTHON_COMMAND = ENV["PYTHON_COMMAND"]
 
@@ -72,7 +80,7 @@ if PREVIEW and WATCH:
     command = "npm run dev"
     folder = "mesh-viewer"
     preview_process = subprocess.Popen(
-        command, cwd=folder, env=os.environ, shell=True)
+        command, cwd=folder, env=env, shell=True)
 
     def exit_handler():
         if os.name != 'nt':
@@ -85,13 +93,12 @@ if WATCH:
     folder = FOLDER or None
     param = FOLDER if FILENAME == "main" else pj(FOLDER, FILENAME) + ".py"
     command = f"nodemon --exec {PYTHON_COMMAND} --watch {FILENAME}.py {CURRENT_FILE} {param}"
-    subprocess.run(command, cwd=folder, env=os.environ, shell=True)
+    subprocess.run(command, cwd=folder, env=env, shell=True)
     exit(0)
 
 
 # Run the mesh generator
 
-env = os.environ.copy()
 if USE_DOCKER:
     folder = pj(CURRENT_FOLDER, "sdf")
     command = "docker-compose run sdf"
@@ -120,5 +127,5 @@ with open(PREVIEW_INFO_FILE, "w") as f:
 if PREVIEW and not WATCH:
     command = "npm run dev"
     folder = "mesh-viewer"
-    output = subprocess.Popen(command, cwd=folder, env=os.environ, shell=True)
+    output = subprocess.Popen(command, cwd=folder, env=env, shell=True)
     output.communicate()
