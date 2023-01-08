@@ -1,3 +1,6 @@
 [submodule "secret"]
 	path = secret
 	url = git@github.com:niklasmh/3d-prints.secret.git
+[submodule "sdf/lib"]
+	path = sdf/lib
+	url = https://github.com/fogleman/sdf.git
