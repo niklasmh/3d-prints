@@ -1,10 +1,17 @@
 
 /*/
+*.stl
 !lib
 !preview
 !run.py
 
+# Example STLs
+!ball-in-cube/*.stl
+!icosahedron-in-cube/*.stl
+!soap-dispenser-holder/*.stl
+
 # Projects
 !ball-in-cube
 !icosahedron-in-cube
+!sink-fix
 !soap-dispenser-holder
