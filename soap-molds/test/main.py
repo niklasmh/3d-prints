@@ -67,13 +67,14 @@ def create_mold(shape, aabb, origin, n=4, print_to_files=False):
 
     def sc(points, scale):
         return [[p[0]*scale, p[1]*scale] for p in points]
-    scaffold = polygon(points=sc(points, 1.1) + sc(points[::-1], 1.02))
+    scaffold = polygon(points=sc(points, 1.1) + sc(points[::-1], 1))
     scaffold_bottom = polygon(points=sc(points, 1.1))
-    scaffold = linear_extrude(10)(scaffold)
+    scaffold = linear_extrude(15)(scaffold)
     scaffold_bottom = linear_extrude(3)(scaffold_bottom)
     scaffold = translate((0, 0, bz[0] - 3))(scaffold)
     scaffold_bottom = translate((0, 0, bz[0] - 3))(scaffold_bottom)
     scaffold += scaffold_bottom
+
     if print_to_files:
         import pathlib
         pathlib.Path('molds').mkdir(exist_ok=True)
