@@ -1,4 +1,8 @@
 *.gx
+*.gltf
+*.glb
+*.obj
+*.mtl
 *.tmp
 
 /*
