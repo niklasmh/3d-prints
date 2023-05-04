@@ -6,6 +6,7 @@
 *.tmp
 
 /*
+!.github
 !flashforge-viewer
 !mesh-viewer
 !secret
