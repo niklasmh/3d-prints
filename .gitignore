@@ -6,6 +6,7 @@
 *.tmp
 
 /*
+!flashforge-viewer
 !mesh-viewer
 !secret
 !sdf
