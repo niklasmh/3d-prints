@@ -9,6 +9,7 @@
 !.github
 !flashforge-viewer
 !mesh-viewer
+!index.html
 !secret
 !sdf
 !makesdf.py
