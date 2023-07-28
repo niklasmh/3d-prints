@@ -4,6 +4,7 @@
 *.obj
 *.mtl
 *.tmp
+*.blend[0-9]*
 
 /*
 !.github
@@ -17,6 +18,7 @@
 !LICENSE
 
 !adjustable-wireless-charger-holder
+!ac-tube-nozzle-angle
 !cable-clip
 !hanging-phone-holder
 !headset-holder
