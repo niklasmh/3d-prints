@@ -39,7 +39,7 @@ hook = linear_extrude(height=width, slices=1)(
 )
 
 fn = 9
-scad_render_to_file(hook, "head-stand-magnet-board.scad",
+scad_render_to_file(hook, "magnetic-night-stand.scad",
                     file_header='$fn = %d;' % fn)
  
  
