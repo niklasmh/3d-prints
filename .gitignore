@@ -3,6 +3,7 @@
 *.glb
 *.obj
 *.mtl
+*.fpp
 *.tmp
 *.blend[0-9]*
 
