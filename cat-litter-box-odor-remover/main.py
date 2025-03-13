@@ -99,4 +99,4 @@ import os
 folder = os.path.basename(os.path.dirname(__file__))
 save(rx(fan_box_input, 90) + ty(tz(rx(fan_box_output, -90), h_fan), d_fan), folder + ".assembly.scad")
 save(fan_box_input, folder + ".fan-box-input.scad")
-save(fan_box_input, folder + ".fan-box-output.scad")
+save(fan_box_output, folder + ".fan-box-output.scad")
