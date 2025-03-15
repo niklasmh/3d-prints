@@ -27,10 +27,10 @@ w_fan = 140 + m # Width of fan
 h_fan = 140 + m # Height of fan
 d_fan = 24 + m # Depth of fan
 r_fan = 134 / 2 # Radius
-ox_fan_hole = 7 # Offset x of fan screw hole
-oy_fan_hole = 7 # Offset y of fan screw hole
-r_fan_hole = 2 # Radius of fan screw hole
-re_fan_hole = 12 # Extra radius of fan screw hole
+ox_fan_hole = 7 + m # Offset x of fan screw hole
+oy_fan_hole = 7 + m # Offset y of fan screw hole
+r_fan_hole = 2.5 # Radius of fan screw hole
+re_fan_hole = 13 # Extra radius of fan screw hole
 d_fan_hole = 5 # Depth of fan screw hole
 
 x_ihose = 0.15 * w_fan # Offset x of hose input connector
