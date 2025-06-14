@@ -29,12 +29,13 @@ save = lambda m, n: scad_render_to_file(m, n, file_header='$fn = 64;')
 # Parameters
 hook_gap = 60    # Gap between the hooks
 hook_count = 4   # Number of hooks along the rod
-hook_radius = 25  # Radius of the hooks
+hook_radius = 28  # Radius of the hooks
+hook_offset = -0.55 # Offset for the hooks
+hook_points = json.load(open("extracted_points.json", "r"))
 
 rod_length = hook_gap * hook_count  # Length of the rod
 rod_height = 15  # Height of the rod
 rod_depth = 3    # Depth of the rod
-hook_points = json.load(open("extracted_points.json", "r"))
 
 dist_from_wall = 15  # Distance from the wall to the rod
 
@@ -62,10 +63,10 @@ def create_hook():
     hook = ty(hook, -points[0][1])
     hook = sxy(hook, -1 / (max_x - min_x))
     hook = sx(hook, -1)
-    hook = tx(hook, -0.4)
+    hook = tx(hook, hook_offset)
 
     hole = cube([1, 1, rod_depth + z2])
-    hole = txy(hole, -0.4, -0.2)
+    hole = txy(hole, hook_offset, -margin)
     hole = tz(hole, -z)
 
     return hook, hole
