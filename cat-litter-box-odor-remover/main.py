@@ -1,6 +1,9 @@
 import numpy as np
 from solid import *
 from solid.utils import *
+import os
+
+folder = os.path.basename(os.path.dirname(__file__))
 
 z = 0.1
 z2 = 0.2
@@ -51,6 +54,7 @@ d_hose = 30 # Depth of hose connector
 h_adapter = 2 # Height of adapter
 w_adapter = 120 # Width of adapter attachment
 d_adapter = 3 # Depth of adapter attachment
+wd_adapter = 3 # Wall depth of adapter attachment
 
 
 def create_fan_box():
@@ -107,38 +111,47 @@ def create_input_adapter():
   m = 5 # Margin
 
   # The input hole for the air flow
-  adapter_hole = cube([w_adapter - m * 2, d_adapter + m * 3, h_adapter + z2])
+  adapter_hole = cube([w_adapter - m * 2, d_adapter + m * 3 + z2, h_adapter + z2])
   adapter_hole = txy(adapter_hole, m, -m - z)
   adapter_hole = tz(adapter_hole, -z)
   left_side_hole = cube([m + z, d_adapter, h_adapter + z2])
+  left_side_hole = ty(left_side_hole, wd_adapter)
   left_side_hole = tz(left_side_hole, -z)
   right_side_hole = left_side_hole
   left_side_hole = tx(left_side_hole, -m - z)
   right_side_hole = tx(right_side_hole, w_adapter)
   side_holes = left_side_hole + right_side_hole
 
+  # Shape of the rounded cat litter box
+  r = 500 # Radius of cat litter box
+  indent = 3 # Indent of the cat litter box
+  litter_box_shape = cylinder(r=r, h=r_hose * 2, segments=256)
+  litter_box_shape = txy(litter_box_shape, w_adapter / 2, r - indent)
+  litter_box_shape = tz(litter_box_shape, -r_hose)
+
   # The shape that meets the litter box
-  adapter_interface = cube([w_adapter + m * 2, d_adapter + m, h_adapter])
-  adapter_interface = tx(adapter_interface, -m)
+  adapter = cube([w_adapter + m * 2, d_adapter + wd_adapter + m, h_adapter])
+  adapter = tx(adapter, -m)
 
-  # The shape outside of the litter box
-  adapter_frame = cube([w_adapter + m * 2, m, h_adapter + m * 2])
-  adapter_frame = txy(adapter_frame, -m, -m)
-  adapter_frame = tz(adapter_frame, -m)
+  # Hose input connector
+  l_hose = w_adapter + m * 2 + d_hose
+  hose_input = cylinder(r=r_hose, h=l_hose)
+  hose_input += sphere(r=r_hose) - sphere(r=r_hose - m_hose)
+  hose_input -= tz(cylinder(r=r_hose - m_hose, h=l_hose + z2), -z)
+  hose_input = ry(hose_input, 90)
+  hose_input = tz(hose_input, h_adapter / 2)
+  hose_input = txy(hose_input, -m, -r_hose)
+  hose_input -= litter_box_shape
 
-  adapter = adapter_interface + adapter_frame
-
-  return adapter - adapter_hole - side_holes
+  return adapter + hose_input - adapter_hole - side_holes
 
 
 fan_box_input = create_fan_box_input()
 fan_box_output = create_fan_box_output()
 input_adapter = create_input_adapter()
+assembly = rx(fan_box_input, 90) + ty(tz(rx(fan_box_output, -90), h_fan), d_fan)
 
-
-import os
-folder = os.path.basename(os.path.dirname(__file__))
-save(rx(fan_box_input, 90) + ty(tz(rx(fan_box_output, -90), h_fan), d_fan), folder + ".assembly.scad")
+save(assembly, folder + ".assembly.scad")
 save(fan_box_input, folder + ".fan-box-input.scad")
 save(fan_box_output, folder + ".fan-box-output.scad")
 save(input_adapter, folder + ".input-adapter.scad")
