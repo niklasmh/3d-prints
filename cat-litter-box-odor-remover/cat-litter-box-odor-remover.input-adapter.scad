@@ -4,62 +4,29 @@ $fn = 64;
 
 difference() {
 	union() {
-		difference() {
-			cube(size = [142, 142, 58.0000000000]);
-			translate(v = [0, 0, -13.0000000000]) {
-				translate(v = [71.0000000000, 71.0000000000, 0]) {
-					sphere(r = 67.0000000000);
-				}
-			}
-			translate(v = [0, 0, -0.1000000000]) {
-				union() {
-					translate(v = [9, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [133, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [9, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [133, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-				}
-			}
+		translate(v = [-5, 0, 0]) {
+			cube(size = [130, 8, 2]);
 		}
-		translate(v = [0, 0, 28.4000000000]) {
-			translate(v = [35.5000000000, 0, 0]) {
-				rotate(a = [90, 0, 0]) {
-					cylinder(h = 30, r = 13);
-				}
+		translate(v = [0, 0, -5]) {
+			translate(v = [-5, -5, 0]) {
+				cube(size = [130, 5, 12]);
 			}
 		}
 	}
-	translate(v = [0, 0, 28.4000000000]) {
-		translate(v = [35.5000000000, 71.0000000000, 0]) {
-			rotate(a = [90, 0, 0]) {
-				cylinder(h = 172.2000000000, r = 10);
+	translate(v = [0, 0, -0.1000000000]) {
+		translate(v = [5, -5.1000000000, 0]) {
+			cube(size = [110, 18, 2.2000000000]);
+		}
+	}
+	union() {
+		translate(v = [-5.1000000000, 0, 0]) {
+			translate(v = [0, 0, -0.1000000000]) {
+				cube(size = [5.1000000000, 3, 2.2000000000]);
+			}
+		}
+		translate(v = [120, 0, 0]) {
+			translate(v = [0, 0, -0.1000000000]) {
+				cube(size = [5.1000000000, 3, 2.2000000000]);
 			}
 		}
 	}
