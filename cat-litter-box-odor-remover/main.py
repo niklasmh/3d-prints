@@ -123,9 +123,9 @@ def create_input_adapter():
   side_holes = left_side_hole + right_side_hole
 
   # Shape of the rounded cat litter box
-  r = 500 # Radius of cat litter box
-  indent = 3 # Indent of the cat litter box
-  litter_box_shape = cylinder(r=r, h=r_hose * 2, segments=256)
+  r = 1000 # Radius of cat litter box
+  indent = 1.5 # Indent of the cat litter box
+  litter_box_shape = cylinder(r=r, h=r_hose * 2, segments=512 * r / 1000)
   litter_box_shape = txy(litter_box_shape, w_adapter / 2, r - indent)
   litter_box_shape = tz(litter_box_shape, -r_hose)
 
