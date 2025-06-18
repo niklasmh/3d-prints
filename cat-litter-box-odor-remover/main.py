@@ -111,8 +111,8 @@ def create_input_adapter():
   m = 5 # Margin
 
   # The input hole for the air flow
-  adapter_hole = cube([w_adapter - m * 2, d_adapter + m * 3 + z2, h_adapter + z2])
-  adapter_hole = txy(adapter_hole, m, -m - z)
+  adapter_hole = cube([w_adapter - m * 6, d_adapter + m * 3 + z2, h_adapter + z2])
+  adapter_hole = txy(adapter_hole, m * 3, -m - z)
   adapter_hole = tz(adapter_hole, -z)
   left_side_hole = cube([m + z, d_adapter, h_adapter + z2])
   left_side_hole = ty(left_side_hole, wd_adapter)
