@@ -2,61 +2,37 @@
 $fn = 64;
 
 
-difference() {
-	union() {
+translate(v = [0, 0, 26]) {
+	rotate(a = [90, 0, 0]) {
 		difference() {
-			cube(size = [142, 142, 58.0000000000]);
-			translate(v = [0, 0, -13.0000000000]) {
-				translate(v = [71.0000000000, 71.0000000000, 0]) {
-					sphere(r = 67.0000000000);
+			translate(v = [-10, -13, 0]) {
+				translate(v = [0, 0, 1.0000000000]) {
+					rotate(a = [0, 90, 0]) {
+						difference() {
+							union() {
+								cylinder(h = 160, r = 13);
+								difference() {
+									sphere(r = 13);
+									sphere(r = 10);
+								}
+							}
+							translate(v = [0, 0, -0.1000000000]) {
+								cylinder(h = 160.2000000000, r = 10);
+							}
+						}
+					}
+				}
+			}
+			translate(v = [0, 0, -13]) {
+				translate(v = [60.0000000000, 998, 0]) {
+					cylinder($fn = 512.0000000000, h = 26, r = 1000);
 				}
 			}
 			translate(v = [0, 0, -0.1000000000]) {
-				union() {
-					translate(v = [9, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [133, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [9, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [133, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
+				translate(v = [0, -5.1000000000, 0]) {
+					cube(size = [120, 21.2000000000, 2.2000000000]);
 				}
 			}
-		}
-		translate(v = [0, 0, 58.0000000000]) {
-			translate(v = [21.3000000000, 71.0000000000, 0]) {
-				cylinder(h = 30, r = 13);
-			}
-		}
-	}
-	translate(v = [0, 0, -0.1000000000]) {
-		translate(v = [21.3000000000, 71.0000000000, 0]) {
-			cylinder(h = 88.2000000000, r = 10);
 		}
 	}
 }

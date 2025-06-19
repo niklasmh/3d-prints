@@ -2,61 +2,35 @@
 $fn = 64;
 
 
-difference() {
-	union() {
+union() {
+	translate(v = [0, -6, 0]) {
 		difference() {
-			cube(size = [142, 142, 58.0000000000]);
-			translate(v = [0, 0, -13.0000000000]) {
-				translate(v = [71.0000000000, 71.0000000000, 0]) {
-					sphere(r = 67.0000000000);
-				}
+			translate(v = [-6, 0, 0]) {
+				cube(size = [15.0000000000, 21, 2]);
 			}
 			translate(v = [0, 0, -0.1000000000]) {
-				union() {
-					translate(v = [9, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [133, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [9, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [133, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
+				translate(v = [-6.1000000000, 6, 0]) {
+					cube(size = [6.1000000000, 9, 2.2000000000]);
 				}
-			}
-		}
-		translate(v = [0, 0, 58.0000000000]) {
-			translate(v = [21.3000000000, 71.0000000000, 0]) {
-				cylinder(h = 30, r = 13);
 			}
 		}
 	}
-	translate(v = [0, 0, -0.1000000000]) {
-		translate(v = [21.3000000000, 71.0000000000, 0]) {
-			cylinder(h = 88.2000000000, r = 10);
+	translate(v = [0, 0, 2]) {
+		translate(v = [24, 0, 0]) {
+			rotate(a = [0, 180, 0]) {
+				translate(v = [0, -6, 0]) {
+					difference() {
+						translate(v = [-6, 0, 0]) {
+							cube(size = [15.0000000000, 21, 2]);
+						}
+						translate(v = [0, 0, -0.1000000000]) {
+							translate(v = [-6.1000000000, 6, 0]) {
+								cube(size = [6.1000000000, 9, 2.2000000000]);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
