@@ -5,61 +5,131 @@ $fn = 64;
 difference() {
 	union() {
 		difference() {
-			cube(size = [142, 142, 58.0000000000]);
-			translate(v = [0, 0, -13.0000000000]) {
-				translate(v = [71.0000000000, 71.0000000000, 0]) {
-					sphere(r = 67.0000000000);
+			union() {
+				difference() {
+					rotate_extrude(angle = 90) {
+						translate(v = [15, 0, 0]) {
+							rotate(a = [0, 0, 180]) {
+								union() {
+									circle(r = 15);
+									translate(v = [-15, -15, 0]) {
+										square(size = [15, 30]);
+									}
+								}
+							}
+						}
+					}
+					rotate_extrude(angle = 90) {
+						translate(v = [15, 0, 0]) {
+							rotate(a = [0, 0, 180]) {
+								circle(r = 10);
+							}
+						}
+					}
+				}
+				translate(v = [0, 0, -15]) {
+					difference() {
+						cube(size = [30, 30, 30]);
+						translate(v = [0, 0, -0.1000000000]) {
+							translate(v = [-0.1000000000, -0.1000000000, 0]) {
+								cube(size = [15, 15, 30.2000000000]);
+							}
+						}
+					}
 				}
 			}
-			translate(v = [0, 0, -0.1000000000]) {
-				union() {
-					translate(v = [9, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
+			translate(v = [0, 15, 0]) {
+				translate(v = [-30.1000000000, 0, 0]) {
+					difference() {
+						translate(v = [0, 0, -15.1000000000]) {
+							cube(size = [60.2000000000, 15.1000000000, 30.2000000000]);
 						}
-					}
-					translate(v = [133, 9, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [9, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
-						}
-					}
-					translate(v = [133, 133, 0]) {
-						union() {
-							translate(v = [0, 0, 5]) {
-								cylinder(h = 58.2000000000, r = 13);
-							}
-							cylinder(h = 58.2000000000, r = 2.5000000000);
+						rotate(a = [0, 90, 0]) {
+							cylinder(h = 60.2000000000, r = 15);
 						}
 					}
 				}
 			}
 		}
-		translate(v = [0, 0, 28.4000000000]) {
-			translate(v = [35.5000000000, 0, 0]) {
-				rotate(a = [90, 0, 0]) {
-					cylinder(h = 30, r = 13);
+		translate(v = [15, 0, 0]) {
+			rotate(a = [90, 0, 0]) {
+				linear_extrude(height = 30) {
+					rotate(a = [0, 0, 180]) {
+						union() {
+							circle(r = 15);
+							translate(v = [-15, -15, 0]) {
+								square(size = [15, 30]);
+							}
+						}
+					}
+				}
+			}
+		}
+		difference() {
+			translate(v = [0, 15, 0]) {
+				rotate(a = [0, -90, 0]) {
+					rotate(a = [0, 0, 90]) {
+						scale(v = [1, -1, 1]) {
+							linear_extrude(height = 30) {
+								rotate(a = [0, 0, 180]) {
+									union() {
+										circle(r = 15);
+										translate(v = [-15, -15, 0]) {
+											square(size = [15, 30]);
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			translate(v = [0, 15, 0]) {
+				translate(v = [-30.1000000000, 0, 0]) {
+					difference() {
+						translate(v = [0, 0, -15.1000000000]) {
+							cube(size = [60.2000000000, 15.1000000000, 30.2000000000]);
+						}
+						rotate(a = [0, 90, 0]) {
+							cylinder(h = 60.2000000000, r = 15);
+						}
+					}
 				}
 			}
 		}
 	}
-	translate(v = [0, 0, 28.4000000000]) {
-		translate(v = [35.5000000000, 71.0000000000, 0]) {
-			rotate(a = [90, 0, 0]) {
-				cylinder(h = 172.2000000000, r = 10);
+	union() {
+		rotate_extrude(angle = 90) {
+			translate(v = [15, 0, 0]) {
+				rotate(a = [0, 0, 180]) {
+					circle(r = 10);
+				}
+			}
+		}
+		translate(v = [0, 0.1000000000, 0]) {
+			translate(v = [15, 0, 0]) {
+				rotate(a = [90, 0, 0]) {
+					linear_extrude(height = 30.2000000000) {
+						rotate(a = [0, 0, 180]) {
+							circle(r = 10);
+						}
+					}
+				}
+			}
+		}
+		translate(v = [0.1000000000, 0, 0]) {
+			translate(v = [0, 15, 0]) {
+				rotate(a = [0, -90, 0]) {
+					rotate(a = [0, 0, 90]) {
+						scale(v = [1, -1, 1]) {
+							linear_extrude(height = 30.2000000000) {
+								rotate(a = [0, 0, 180]) {
+									circle(r = 10);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
