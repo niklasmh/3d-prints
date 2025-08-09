@@ -125,7 +125,7 @@ def create_lid(organizer_mask):
     model = sz(organizer_mask, hs)
     s = ro_cup / (ro_cup + m / 2 * 1.2)
     model += tz(sz(sy(sx(organizer_mask, s), s), hs), m * 1.5)
-    s = ro_cup / (ro_cup + m / 2 * 1)
+    s = ro_cup / (ro_cup + m / 2 * 0.8)
     model -= tz(sz(sy(sx(organizer_mask, s), s), hs), -m * 1.5)
 
     indent = tz(cylinder(h=m * 3, r=ro_cup + 1 + m, segments=64), m)
