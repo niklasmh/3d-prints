@@ -25,7 +25,7 @@ pi = np.pi
 save = lambda m, n: scad_render_to_file(m, n, file_header="$fn = 64;")
 
 # Parameters
-w_cup = 3
+w_cup = 1.5
 r_bottom = 4
 ri_cup = 43 / 2
 ro_cup = ri_cup + w_cup
@@ -46,8 +46,15 @@ def create_cup():
     shape = o_shape - i_shape
 
     # Smooth top corner
-    r = 0.8
+    r = 1
     shape += txy(circle(r=w_cup * r), ro_cup + w_cup * (r - 1), h_cup)
+    angle = 30
+    x = sin(angle * pi / 180) * w_cup * r * 2
+    y = -cos(angle * pi / 180) * w_cup * r * 2
+    shape += txy(
+        square([w_cup * r, w_cup * r]), ro_cup + w_cup * (r - 2.5) + x, h_cup + y
+    )
+    shape -= txy(circle(r=w_cup * r), ro_cup + w_cup * (r - 1) + x, h_cup + y)
 
     # Create model
     model = rotate_extrude(angle=360)(shape)
@@ -82,5 +89,59 @@ def create_organizer(cup_mask):
     return model - mask
 
 
-organizer = create_organizer(cup_mask)
-save(organizer + cup, "powder-organizer.organizer.scad")
+def create_organizer(cup_mask):
+    mask = cup_mask
+    h = h_cup + m * 2
+    model = cylinder(h=h, r=ro_cup * 3 + m * 13.5, segments=6)
+
+    for i in np.linspace(0, 360, 6, endpoint=False):
+        r = ro_cup * 2 + m * 6
+        x = cos(i * pi / 180) * r
+        y = sin(i * pi / 180) * r
+        x2 = cos((i + 30) * pi / 180) * r * 2.0
+        y2 = sin((i + 30) * pi / 180) * r * 2.0
+        mask += txy(cup_mask, x, y)
+        model += txy(cylinder(h=h, r=ro_cup + m * 7.5, segments=64), x, y)
+        model -= tz(
+            txy(cylinder(h=h + z2 * 10, r=ro_cup + m * 7.5, segments=64), x2, y2),
+            -z * 10,
+        )
+
+    model = tz(model, -m * 3)
+    s = ro_cup / (ro_cup + m / 2)
+    hole = tz(sc(s)(model), h * 0.6)
+    ms = m * 2 / h_cup
+    bottom_track = tz(sx(sy(sz(model, ms), s), s), -m * 3.5)
+
+    return model + bottom_track - mask - hole, model
+
+
+organizer, organizer_mask = create_organizer(cup_mask)
+save(organizer, "powder-organizer.organizer.scad")
+
+
+def create_lid(organizer_mask):
+    hs = m * 2 / h_cup
+    model = sz(organizer_mask, hs)
+    s = ro_cup / (ro_cup + m / 2 * 1.2)
+    model += tz(sz(sy(sx(organizer_mask, s), s), hs), m * 1.5)
+    s = ro_cup / (ro_cup + m / 2 * 1)
+    model -= tz(sz(sy(sx(organizer_mask, s), s), hs), -m * 1.5)
+
+    indent = tz(cylinder(h=m * 3, r=ro_cup + 1 + m, segments=64), m)
+    extra = tz(cylinder(h=m * 2.4, r=ri_cup - 0.2, segments=64), m)
+    model -= indent
+    model += extra
+
+    for i in np.linspace(0, 360, 6, endpoint=False):
+        r = ro_cup * 2 + m * 6
+        x = cos(i * pi / 180) * r
+        y = sin(i * pi / 180) * r
+        model -= txy(indent, x, y)
+        model += txy(extra, x, y)
+
+    return model
+
+
+lid = create_lid(organizer_mask)
+save(lid, "powder-organizer.lid.scad")
