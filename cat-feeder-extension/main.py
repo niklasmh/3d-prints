@@ -27,9 +27,9 @@ pi = np.pi
 save = lambda m, n: scad_render_to_file(m, n, file_header="$fn = 64;")
 
 # Parameters
-height = 100
+height = 200
 thickness = 1.5
-i_width = 188.9
+i_width = 189.1
 o_width = i_width + thickness * 2
 
 lid_depth = 5
@@ -68,10 +68,10 @@ def create_extension():
     # Attempt to create symmetry
     shape += sx(shape, -1)
     shape += sy(shape, -1)
-    # shape += rz(shape, 90)
+    # shape += rz(shape, 90)  # Too much
 
     # Adjust size
-    i_wall = sxy(shape, i_width)
+    i_wall = sxy(shape, i_width - 0.3)
     i_wall = sz(i_wall, lid_depth)
     o_wall = sxy(shape, o_width)
     o_wall = sz(o_wall, height)
