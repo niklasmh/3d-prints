@@ -63,6 +63,9 @@ def create_cup():
     s = (ro_cup + m) / ro_cup
     mask = tz(sc(s)(rotate_extrude(angle=360)(o_shape)), -m)
 
+    # Hotfix for model
+    model = sc([1.03, 1.03, 0.98])(model)
+
     return model, mask
 
 
