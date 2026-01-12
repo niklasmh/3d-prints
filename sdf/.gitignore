@@ -7,15 +7,15 @@
 !run.py
 
 # Example STLs
-!ball-in-cube/*.stl
-!icosahedron-in-cube/*.stl
-!soap-dispenser-holder/*.stl
-!shower-soap-container/*.stl
+!*-ball-in-cube/*.stl
+!*-icosahedron-in-cube/*.stl
+!*-soap-dispenser-holder/*.stl
+!*-shower-soap-container/*.stl
 
 # Projects
-!ball-in-cube
-!icosahedron-in-cube
-!ikea-skadis-mount-cover
-!sink-fix
-!soap-dispenser-holder
-!shower-soap-container
+!*-ball-in-cube
+!*-icosahedron-in-cube
+!*-ikea-skadis-mount-cover
+!*-sink-fix
+!*-soap-dispenser-holder
+!*-shower-soap-container
