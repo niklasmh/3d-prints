@@ -16,6 +16,7 @@
 !sdf
 !makesdf.py
 !.gitmodules
+!requirements.txt
 !setup.cfg
 !LICENSE
 
