@@ -16,6 +16,7 @@
 !sdf
 !makesdf.py
 !.gitmodules
+!setup.cfg
 !LICENSE
 
 !ac-tube-nozzle-angle

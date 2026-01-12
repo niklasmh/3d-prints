@@ -1,5 +1,6 @@
 
 /*/
+*.3mf
 *.stl
 !lib
 !preview
@@ -9,6 +10,7 @@
 !ball-in-cube/*.stl
 !icosahedron-in-cube/*.stl
 !soap-dispenser-holder/*.stl
+!shower-soap-container/*.stl
 
 # Projects
 !ball-in-cube
@@ -16,3 +18,4 @@
 !ikea-skadis-mount-cover
 !sink-fix
 !soap-dispenser-holder
+!shower-soap-container
