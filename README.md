@@ -1,7 +1,15 @@
-# Collection of 3D Prints
+# 3D Print Collection
 
-I want to share some of my creations such that you can get inspired.
+A collection of practical 3D-printable designs spanning from 2020 to present. All models are designed to solve real-world problems and improve everyday life.
 
-Creating models for a 3D printer is not that hard. I use [SketchUp](https://app.sketchup.com/app) and [Blender](https://www.blender.org) to do quick sketches of what I want to create. However, SketchUp and other free modeling software are either hard to learn or have many limitations. Therefore I sometimes also use [OpenSCAD](https://www.openscad.org/) together with [`openpyscad`](https://github.com/taxpon/openpyscad) or [SolidPython](https://github.com/SolidCode/SolidPython) such that I can code my creations. I have also found SDFs to be a great way to create smooth volumetric models, using a [SDF for Python](https://github.com/fogleman/sdf) library. This way I do not have any limitations and I get full control by using variables and other perks with programming, like for-loops and functions.
+## 📂 Categories
 
-Recently, I have also had great success with using ChatGPT together with OpenSCAD and Blender.
+- **[01-tech/](01-tech)** (6 projects) - Phone holders, charging accessories, cable management
+- **[02-adapters/](02-adapters)** (3 projects) - Custom adapters and connectors
+- **[03-holders/](03-holders)** (5 projects) - Hooks, mounts, and wall attachments
+- **[04-furniture/](04-furniture)** (4 projects) - IKEA mods and furniture improvements
+- **[05-home/](05-home)** (6 projects) - Home improvement and organizational tools
+- **[06-pet/](06-pet)** (3 projects) - Cat-related solutions and accessories
+- **[07-art/](07-art)** (1 project) - Decorative and artistic prints
+- **[sdf/](sdf)** (6 projects) - Advanced SDF-based volumetric designs
+- **mesh-viewer/** - Utility for viewing 3D meshes (used for SDF)
