@@ -9,17 +9,26 @@ import signal
 import shutil
 import subprocess
 
-parser = argparse.ArgumentParser(add_help=False,
-                                 description='Generate mesh models from SDF using marching cubes.')
+parser = argparse.ArgumentParser(
+    add_help=False, description="Generate mesh models from SDF using marching cubes."
+)
 
 parser.add_argument(
-    "file", help="Python filename (with .py-extension) OR folder (containing main.py file).")
-parser.add_argument("-w", "--watch", action="store_true",
-                    help="Generate new mesh when file is changed.")
-parser.add_argument("-p", "--preview", action="store_true",
-                    help="Preview mesh in browser.")
-parser.add_argument('--help', action='help', default=argparse.SUPPRESS,
-                    help='Show this help message and exit.')
+    "file",
+    help="Python filename (with .py-extension) OR folder (containing main.py file).",
+)
+parser.add_argument(
+    "-w", "--watch", action="store_true", help="Generate new mesh when file is changed."
+)
+parser.add_argument(
+    "-p", "--preview", action="store_true", help="Preview mesh in browser."
+)
+parser.add_argument(
+    "--help",
+    action="help",
+    default=argparse.SUPPRESS,
+    help="Show this help message and exit.",
+)
 args = parser.parse_args()
 
 
@@ -63,13 +72,13 @@ IS_PYTHON_FILE = args.file[-3:] == ".py"
 if IS_PYTHON_FILE:
     PATH = args.file[:-3]
     FILENAME = ps(PATH)[-1]
-    PROJECT_NAME = FILENAME
+    PROJECT_NAME = FILENAME[8:]
     FOLDER = pj(*ps(PATH)[:-1])
     MESH_FILE = pj(CURRENT_FOLDER, FOLDER, FILENAME + ".stl")
 else:
     PATH = args.file
     FILENAME = "main"
-    PROJECT_NAME = ps(PATH)[-1]
+    PROJECT_NAME = ps(PATH)[-1][8:]
     FOLDER = PATH
     MESH_FILE = pj(CURRENT_FOLDER, FOLDER, PROJECT_NAME + ".stl")
 WATCH = args.watch
@@ -79,11 +88,10 @@ PREVIEW = args.preview
 if PREVIEW and WATCH:
     command = "npm run dev"
     folder = "mesh-viewer"
-    preview_process = subprocess.Popen(
-        command, cwd=folder, env=env, shell=True)
+    preview_process = subprocess.Popen(command, cwd=folder, env=env, shell=True)
 
     def exit_handler():
-        if os.name != 'nt':
+        if os.name != "nt":
             os.killpg(os.getpgid(preview_process.pid), signal.SIGTERM)
 
     atexit.register(exit_handler)
@@ -92,7 +100,9 @@ if PREVIEW and WATCH:
 if WATCH:
     folder = FOLDER or None
     param = FOLDER if FILENAME == "main" else pj(FOLDER, FILENAME) + ".py"
-    command = f"nodemon --exec {PYTHON_COMMAND} --watch {FILENAME}.py {CURRENT_FILE} {param}"
+    command = (
+        f"nodemon --exec {PYTHON_COMMAND} --watch {FILENAME}.py {CURRENT_FILE} {param}"
+    )
     subprocess.run(command, cwd=folder, env=env, shell=True)
     exit(0)
 
