@@ -12,44 +12,439 @@
     <style>
       body {
         font-family: "Roboto", sans-serif;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
         margin: 0;
-        align-items: center;
-        justify-content: center;
+        padding: 20px;
         background-color: #111;
         color: #ddd;
+        line-height: 1.6;
       }
-      #cam {
-        width: 100%;
-        max-width: 640px;
-        border-radius: 16px;
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 20px 0;
+        border-bottom: 2px solid #333;
+      }
+      h1 {
+        margin: 0;
+        font-size: 2.5em;
+      }
+      h3 {
+        margin: 10px 0 0 0;
+        font-weight: 400;
+        color: #888;
+      }
+      .intro {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 1.1em;
+      }
+      .category {
+        margin-bottom: 40px;
+      }
+      .category h2 {
+        color: #0ff;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .project {
+        background-color: #1a1a1a;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 3px solid #0ff;
+        transition: transform 0.2s, background-color 0.2s;
+        display: block;
+        cursor: pointer;
+      }
+      .project:hover {
+        transform: translateX(5px);
+        background-color: #222;
+      }
+      .project-name {
+        font-weight: 900;
+        margin-bottom: 5px;
+        color: #fff;
+      }
+      .project-date {
+        font-size: 0.85em;
+        color: #666;
       }
       a {
         text-decoration: none;
-        color: #0ff;
+        color: inherit;
       }
-      nav {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+      .utilities {
+        margin-top: 60px;
+        padding-top: 40px;
+        border-top: 2px solid #333;
+      }
+      .utilities h2 {
+        color: #f90;
+      }
+      .utilities ul {
+        list-style: none;
+        padding: 0;
+      }
+      .utilities li {
+        background-color: #1a1a1a;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border-left: 3px solid #f90;
+      }
+      .utilities a {
+        color: #f90;
+        font-weight: 900;
+      }
+      .utilities a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1>3D Prints</h1>
-      <h3>by Niklas M. Hole</h3>
-    </header>
-    <nav>
-      <p>Pages:</p>
-      <ul>
-        <li>
-          <a href="flashforge-viewer">FlashForge camera viewer</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="container">
+      <header>
+        <h1>🖨️ 3D Prints</h1>
+        <h3>by Niklas M. Hole</h3>
+      </header>
+
+      <div class="intro">
+        <p>
+          A collection of practical 3D-printable designs spanning from 2020 to present.<br />
+          All models are designed to solve real-world problems and improve everyday life.
+        </p>
+      </div>
+
+      <div class="category">
+        <h2>📱 Tech & Electronics</h2>
+        <div class="projects">
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/01-tech/2020-11-hanging-phone-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Hanging Phone Holder</div>
+            <div class="project-date">November 2020</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/01-tech/2020-11-headset-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Headset Holder</div>
+            <div class="project-date">November 2020</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/01-tech/2020-11-musicangel-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">MusicAngel Holder</div>
+            <div class="project-date">November 2020</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/01-tech/2020-11-popsocket-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">PopSocket Holder</div>
+            <div class="project-date">November 2020</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/01-tech/2021-01-adjustable-wireless-charger-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Adjustable Wireless Charger Holder</div>
+            <div class="project-date">January 2021</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/01-tech/2021-09-cable-clip"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Cable Clip</div>
+            <div class="project-date">September 2021</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>🔧 Adapters & Connectors</h2>
+        <div class="projects">
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/02-adapters/2020-10-kran-adapter"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">M20 to M22 Faucet Adapter</div>
+            <div class="project-date">October 2020</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/02-adapters/2023-07-ac-tube-nozzle-angle"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">AC Tube Nozzle Angle</div>
+            <div class="project-date">July 2023</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/02-adapters/2025-07-aqara-roller-shades-adapter"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Aqara Roller Shades Adapter</div>
+            <div class="project-date">July 2025</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>🪝 Holders & Mounts</h2>
+        <div class="projects">
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/03-holders/2021-03-hook-behind-couch"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Hook Behind Couch</div>
+            <div class="project-date">March 2021</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/03-holders/2021-03-hook-for-kitchen-pincer"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Kitchen Pincer Hook</div>
+            <div class="project-date">March 2021</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/03-holders/2021-08-resistor-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Resistor Holder</div>
+            <div class="project-date">August 2021</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/03-holders/2023-03-razor-wall-mount"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Razor Wall Mount</div>
+            <div class="project-date">March 2023</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/03-holders/2025-06-sunglass-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Sunglass Holder</div>
+            <div class="project-date">June 2025</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>🪑 Furniture Modifications</h2>
+        <div class="projects">
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/04-furniture/2022-06-ikea-elvarli-curtain-rod-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">IKEA ELVARLI Curtain Rod Holder</div>
+            <div class="project-date">June 2022</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/04-furniture/2023-02-ikea-skadis-mount-cover"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">IKEA SKADIS Mount Cover</div>
+            <div class="project-date">February 2023</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/04-furniture/2023-07-magnetic-night-stand"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Magnetic Night Stand</div>
+            <div class="project-date">July 2023</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/04-furniture/2024-11-ikea-fake-front-attachment"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">IKEA Fake Front Attachment</div>
+            <div class="project-date">November 2024</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/04-furniture/2025-11-ikea-marius-chair-leg-fix"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">IKEA MARIUS Chair Leg Fix</div>
+            <div class="project-date">November 2025</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>🏠 Home Improvements</h2>
+        <div class="projects">
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2022-06-oven-fan-tube-attachment"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Oven Fan Tube Attachment</div>
+            <div class="project-date">June 2022</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2022-07-no-to-ads-on-mailbox"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">No To Ads On Mailbox</div>
+            <div class="project-date">July 2022</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2022-09-light-strip-attachment"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Light Strip Attachment</div>
+            <div class="project-date">September 2022</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2022-12-soap-dispenser-holder"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Soap Dispenser Holder</div>
+            <div class="project-date">December 2022</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2023-01-sink-fix"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Sink Fix</div>
+            <div class="project-date">January 2023</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2023-02-soap-molds"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Soap Molds</div>
+            <div class="project-date">February 2023</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2025-03-automatic-window-opener"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Automatic Window Opener</div>
+            <div class="project-date">March 2025</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2025-08-powder-organizer"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Powder Organizer</div>
+            <div class="project-date">August 2025</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/05-home/2026-01-shower-soap-container"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Shower Soap Container</div>
+            <div class="project-date">January 2026</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>🐱 Pet Accessories</h2>
+        <div class="projects">
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/06-pet/2025-03-cat-litter-box-odor-remover"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Cat Litter Box Odor Remover</div>
+            <div class="project-date">March 2025</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/06-pet/2025-06-cat-keyboard-protection"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Cat Keyboard Protection</div>
+            <div class="project-date">June 2025</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/06-pet/2025-09-cat-feeder-extension"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Cat Feeder Extension</div>
+            <div class="project-date">September 2025</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category">
+        <h2>🎨 Art & Decorative</h2>
+        <div class="projects">
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/07-art/2021-01-sphere-in-cube"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Sphere in Cube</div>
+            <div class="project-date">January 2021</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/07-art/2022-12-ball-in-cube"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Ball in Cube</div>
+            <div class="project-date">December 2022</div>
+          </a>
+          <a
+            href="https://github.com/niklasmh/3d-prints/tree/master/07-art/2022-12-icosahedron-in-cube"
+            target="_blank"
+            class="project"
+          >
+            <div class="project-name">Icosahedron in Cube</div>
+            <div class="project-date">December 2022</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="utilities">
+        <h2>🛠️ Utilities & Tools</h2>
+        <ul>
+          <li><a href="mesh-viewer">Mesh Viewer</a> - 3D mesh visualization tool</li>
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
