@@ -5,7 +5,9 @@
 *.mtl
 *.fpp
 *.tmp
+*.3mf
 *.blend[0-9]*
+*.detailed.*
 
 .venv
 .env
