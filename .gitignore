@@ -6,6 +6,7 @@
 *.fpp
 *.tmp
 *.3mf
+*.blend
 *.blend[0-9]*
 *.detailed.*
 
